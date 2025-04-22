@@ -1,0 +1,6 @@
+{
+    "require": {
+        "pbieling/pbclasses-min": "dev-main",
+        "michelf/php-markdown": "*"
+    }
+}

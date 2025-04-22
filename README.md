@@ -1,0 +1,52 @@
+# PbTpl Examples
+
+A tutorial by Peter Bieling - https://p-bieling.de
+
+##Description
+
+PbTpl is part of a framework called PbClasses that I use for my PHP projects for many years. 
+It is not yet freely available, but I have now published the two most important classes in a minimal version.
+If you don't need the database class you can also use PbTpl separately.
+
+These are some examples that show how to use the PbTpl template class 
+in order to use it as effectively as possible.
+
+To decide whether you want to install the package, you can view the example pages on my website.  
+[PbTpl - Examples Preview](https://www.media-palette.de/demo/tpldemo/examples/index.php)
+
+##Requirement
+
+In order to be able to view all examples and explanations without errors, the Markdown package 
+__michelf/php-markdown__ used as well as the JavaScript library __prism.js__ for the improved 
+display of the template code. (see next section)
+
+You need a local web server environment e.g. __Apache server__.
+To see also the database example, 
+-  Example 5 - Showing data from database table
+
+you need MySQL or MariaDB with a prepared empty database.
+
+For the installation of __pbclasses-min__ and __php-markdown__ you need __composer__:
+https://getcomposer.org/download/  
+To install __prism__, you can find more information here:  
+https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
+
+##Installation
+- Clone or download this package into a localhost environment.
+- Open the command line and go to the directory where the composer.json is located.
+- Run the command __composer update__
+- Run the command __npm update__
+- Update the database credentials in __examples/config/db.conf.php__. (The table is installed by the PHP script.)
+- Start with example/index.php in the browser.
+- Read the Informations in the examples
+- Study the source files
+- Try PbTpl for yourself by modifying the examples or creating new ones
+
+
+
+
+
+
+
+
+
