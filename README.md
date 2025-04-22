@@ -2,7 +2,7 @@
 
 A tutorial by Peter Bieling - https://p-bieling.de
 
-##Description
+## Description
 
 PbTpl is part of a framework called PbClasses that I use for my PHP projects for many years. 
 It is not yet freely available, but I have now published the two most important classes in a minimal version.
@@ -14,7 +14,7 @@ in order to use it as effectively as possible.
 To decide whether you want to install the package, you can view the example pages on my website.  
 [PbTpl - Examples Preview](https://www.media-palette.de/demo/tpldemo/examples/index.php)
 
-##Requirement
+## Requirement
 
 In order to be able to view all examples and explanations without errors, the Markdown package 
 __michelf/php-markdown__ used as well as the JavaScript library __prism.js__ for the improved 
@@ -31,7 +31,7 @@ https://getcomposer.org/download/
 To install __prism__, you can find more information here:  
 https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
 
-##Installation
+## Installation
 - Clone or download this package into a localhost environment.
 - Open the command line and go to the directory where the composer.json is located.
 - Run the command __composer update__
