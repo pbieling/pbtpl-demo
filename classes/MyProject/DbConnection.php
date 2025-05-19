@@ -9,13 +9,15 @@ class DbConnection {
     public static function get() {
         $conFile = './config/db.conf.php';
         if (!file_exists($conFile)) {
-            throw new \Exception('Vonfig-file not found.');
+            throw new \Exception('config/db.conf.php not found.');
         }
         $confArr = require $conFile;
 
         $db = new SqlPdo($confArr);
 
-        self::prepareTable($db);
+        if (!self::tableReady($db)) {
+            self::prepareTable($db);
+        }
 
         return $db;
     }
@@ -23,9 +25,7 @@ class DbConnection {
     protected static function prepareTable($db) {
         $dump = <<< 'TABLEDUMP'
 DROP TABLE IF EXISTS `customer`;
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-
 
 CREATE TABLE `customer` (
   `id` int(11) NOT NULL,
@@ -36,8 +36,6 @@ CREATE TABLE `customer` (
   `state` varchar(50) NOT NULL,
   `zip` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
 
 INSERT INTO `customer` (`id`, `first_name`, `last_name`, `address`, `city`, `state`, `zip`) VALUES
 (1, 'John', 'Doe', '123 Maple St', 'Springfield', 'IL', '62704'),
@@ -51,10 +49,8 @@ INSERT INTO `customer` (`id`, `first_name`, `last_name`, `address`, `city`, `sta
 (9, 'Sophia', 'Anderson', '333 Fir Way', 'San Diego', 'CA', '92101'),
 (10, 'James', 'Thomas', '444 Willow Pkwy', 'Phoenix', 'AZ', '85001');
 
-
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`id`);
-
 
 ALTER TABLE `customer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
@@ -65,6 +61,26 @@ TABLEDUMP;
             $db->multiQuery($dump);
         } catch (\Exception $exc) {
             echo $exc->getMessage();
+            exit;
         }
+    }
+    
+    protected static function tableReady($db) {
+        try {
+            $tableArr = $db->getTableList();
+        } catch (\Exception $exc) {
+            echo $exc->getMessage();
+            exit;
+        }
+        
+        if (! in_array('customer', $tableArr)) {
+            return false;
+        }
+        
+        $res = $db->select('customer', 'id');
+        if (! $res) {
+            return false;
+        }
+        return true;
     }
 }
