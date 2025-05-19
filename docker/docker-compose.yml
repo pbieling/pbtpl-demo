@@ -1,0 +1,30 @@
+services:
+  web:
+    image: pbieling/pbtpl-demo:latest 
+
+    ports:
+      - "8888:80" 
+    depends_on:
+      - mysql
+    volumes:
+     - ./html:/var/www/html 
+
+  mysql:
+    image: mysql:8.1.0 
+    environment:
+      MYSQL_ROOT_PASSWORD: password   
+      MYSQL_DATABASE: pbtpldemo 
+    command: --innodb-flush-log-at-trx-commit=2
+    volumes:
+      - mysql_data:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql   
+    environment:
+      PMA_HOST: mysql
+ 
+volumes:
+  mysql_data:
